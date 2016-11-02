@@ -2,7 +2,7 @@
 /** класс реализует калькулятор
 */
 
-public class Calculator{
+public class Calculatorold{
 	/** результат вычисления
 	*/
 

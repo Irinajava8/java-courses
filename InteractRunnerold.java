@@ -3,11 +3,11 @@ import java.unit.scanner;
 /**
 Класс для запуска калькулятораю Поддерживает ввод пользователя
 */
-public class InteractRunner{
+public class InteractRunnerold{
 	public static void main(String[]arg){
 		Scanner reader=new Scanner(System.in);
 		try{
-			Calculator calc=new Calculator();
+			Calculatorold calc=new Calculatorold();
 			String exit="no";
 			While(!exit.equals("yes")){
 				System.out.println("Enter first arg: ");

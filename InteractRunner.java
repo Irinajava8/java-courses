@@ -5,87 +5,51 @@ import java.util.Scanner;
 Есть возможность повторного использования результата вычислений
 */
 public class InteractRunner{
-	public static void main(String[]arg){
-		
-		try(Scanner reader = new Scanner(System.in);) {
-			Calculator calc = new Calculator();
-			            String exit = "no";
-            		            int first;
-			            int second;
-				    String save = "clear";
+	public static void main(String[]args){
+	Scanner reader = new Scanner(System.in);	
+	Calculator calcul= new Calculator();
 
-			/**
-			Пока не будет указан выход продолжаем
-			*/
-
-			while (!exit.equals("yes")) {
-			
-			if(save.equals("save")){
-				first=(int)calc.getResult();
-			}else {
-				System.out.println("Enter first arg: ");
-				first=reader.nextInt();
-			}
-
-/**
-System.out.println("Enter first arg: ");
-String first=reader.next();
-*/
-				System.out.println("Enter second arg: ");
-				second = reader.nextInt();
-				System.out.println("Enter operation (+ | - | * | /) ");
-				String operation=reader.next();
-
-	switch (operation){
-		case "+" : calc.add(first,second);
-				System.out.println("Result: " +calc.getResult());
-		break;
-
-		case "-" : calc.minus(first,second);
-				System.out.println("Result: " +calc.getResult());
-		break;
-
-		case "*" : calc.mult(firnst,second);
-				System.out.println("Result: " +calc.getResult());
-		break;
-	
-			
-		case "/":
-			if (second!=0){
-			calc.divid(first,second);
-				System.out.println("Result: " +calc.getResult());
-
-		 	} else {
-			System.out.println("Division... Second is 0. you can't divide");}
-			break;
-
-                        
-}
-
-						
-
-		System.out.println();
-				System.out.println("Exit: yes/no ");
-				exit=reader.next();
-		
 		/**
-		Возможность сохранить результат вычисления для повторного использования
-		*/		
-			if(exit.equals("no")){
-			System.out.println("Save result arg ? (save | clear)");
-			save=reader.next();
-			if(save.equals("clear")) {
-				calc.cleanResult();
-			}else if(save.equals("save")){
-				System.out.println("First arg: " + calc.getResult());
-			}
-		}
-		}
-}
-}
-}
+		Пока не будет указан выход продолжаем
+		*/
 
+	while (true) 
+	start: {
+		/**Если результат не сохранен*/
+		if(!calcul.isSave()){
+		try{
+		System.out.println("Enter first arg: ");
+		calcul.setFirst(Double.parseDouble(reader.next())); // Перевод string в double
 		
+		System.out.println("Enter operation (+ | - | * | /) ");
+		calcul.setOperation(reader.next());
+		} catch(Exception e){
+		System.out.println("Type numbers");
+		break start;
+		}
+		}
+	try{
+		System.out.println("Enter second arg: ");
+		calcul.setSecond(Double.parseDouble(reader.next())); // Перевод string в double
+		}catch(Exception e){
+		System.out.println("Type numbers");
+		break start; // Выход из цикла
+		}
+		System.out.println("Result: " +calcul.calc());
+		System.out.println("Type 'y' if you want to exit or any symbols " );
+		
+		if(reader.next().equals("y")){ //Нажали y и выход
+		System.out.println("Exit! ");
+		break;
+		}
+	else{
+		System.out.println("Enter 'y' if you don't want to save result or enter any symbol use next ");
+		if(!reader.next().equals("y")){ // Если не y , то сохранить результат
+		calcul.setSave(true);
+		calcul.setFirst(calcul.getResult());
+		}
+		}
 
-	
-	
+}
+}
+}
